@@ -1,0 +1,1 @@
+# hs-vault-example
