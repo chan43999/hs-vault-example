@@ -33,19 +33,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args:  ['sh', '-c', 'source /vault/secrets/data-secret-read-config && tail -f /dev/null']
+          args: ['sh', '-c', 'source /vault/secrets/data-my-secret && tail -f /dev/null']
           ports:
             - name: http
               containerPort: 3000
               protocol: TCP
-#          livenessProbe:
-#            httpGet:
-#              path: /
-#              port: http
-#          readinessProbe:
-#            httpGet:
-#              path: /
-#              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

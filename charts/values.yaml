@@ -26,10 +26,11 @@ serviceAccount:
 podAnnotations:
   vault.hashicorp.com/agent-inject: "true"
   vault.hashicorp.com/role: "express-read"
-  vault.hashicorp.com/agent-inject-secret-data-secret-read-config: "secret/data/secret-read/config/data"
-  vault.hashicorp.com/agent-inject-template-data-secret-read-config: |
-    {{ with secret "secret/data/secret-read/config/data" -}}
-      export username="{{ .Data.data.username }}"
+  vault.hashicorp.com/agent-inject-secret-data-my-secret: "data/my-secret"
+  vault.hashicorp.com/agent-inject-template-data-my-secret: |
+    {{ with secret "data/my-secret" -}}
+    export username="{{ .Data.data.username }}"
+    export password="{{ .Data.data.password }}"
     {{- end }}
 
 
